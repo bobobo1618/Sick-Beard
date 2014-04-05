@@ -92,7 +92,6 @@ class NameParser(object):
                 if cur_regex_name == 'bare' and tmp_season in (19,20):
                     continue
                 result.season_number = tmp_season
-            
             elif cur_regex == 'anime':
                 result.season_number = 1
             
