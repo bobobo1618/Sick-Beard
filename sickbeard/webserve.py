@@ -1500,6 +1500,8 @@ class ConfigProviders:
                 sickbeard.NEXTGEN = curEnabled
             elif curProvider == 'speedcd':
                 sickbeard.SPEEDCD = curEnabled
+            elif curProvider == 'nyaatorrents':
+                sickbeard.NYAA = curEnabled
             elif curProvider == 'binsearch':
             	sickbeard.BINSEARCH = curEnabled
             elif curProvider in newznabProviderDict:
