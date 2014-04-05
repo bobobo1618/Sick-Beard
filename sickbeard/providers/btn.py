@@ -158,28 +158,20 @@ class BTNProvider(generic.TorrentProvider):
 
     def _get_title_and_url(self, parsedJSON):
 
-        # The BTN API gives a lot of information in response,
-        # however Sick Beard is built mostly around Scene or
-        # release names, which is why we are using them here.
-
-        if 'ReleaseName' in parsedJSON and parsedJSON['ReleaseName']:
-            title = parsedJSON['ReleaseName']
-
-        else:
-            # If we don't have a release name we need to get creative
-            title = u''
-            if 'Series' in parsedJSON:
-                title += parsedJSON['Series']
-            if 'GroupName' in parsedJSON:
-                title += '.' + parsedJSON['GroupName'] if title else parsedJSON['GroupName']
-            if 'Resolution' in parsedJSON:
-                title += '.' + parsedJSON['Resolution'] if title else parsedJSON['Resolution']
-            if 'Source' in parsedJSON:
-                title += '.' + parsedJSON['Source'] if title else parsedJSON['Source']
-            if 'Codec' in parsedJSON:
-                title += '.' + parsedJSON['Codec'] if title else parsedJSON['Codec']
-            if title:
-                title = title.replace(' ', '.')
+        # If we don't have a release name we need to get creative
+        title = u''
+        if 'Series' in parsedJSON:
+            title += parsedJSON['Series']
+        if 'GroupName' in parsedJSON:
+            title += '.' + parsedJSON['GroupName'] if title else parsedJSON['GroupName']
+        if 'Resolution' in parsedJSON:
+            title += '.' + parsedJSON['Resolution'] if title else parsedJSON['Resolution']
+        if 'Source' in parsedJSON:
+            title += ' ' + parsedJSON['Source'] if title else parsedJSON['Source']
+        if 'Codec' in parsedJSON:
+            title += '.' + parsedJSON['Codec'] if title else parsedJSON['Codec']
+        if title:
+            title = title.replace(' ', '.')
 
         url = None
         if 'DownloadURL' in parsedJSON:
