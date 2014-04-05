@@ -22,9 +22,7 @@ ep_regexes = [
               ('anime',
                # [HorribleSubs] Fairy Tail S2 - 01 [1080p].mkv
                #  Group         Show          - Ep [Quality]
-               '''
-               ^\[(?P<release_group>.+)\] (?P<series_name>.+) - (?P<ep_num>\d+) \[(?P<extra_info>.+)\]$
-               '''
+               '^\[(?P<release_group>.+)\]\ (?P<series_name>.+)\ -\ (?P<ep_num>\d+)\ \[(?P<extra_info>.+)\]$'
               ),
               ('standard_repeat',
                # Show.Name.S01E02.S01E03.Source.Quality.Etc-Group
