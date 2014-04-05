@@ -94,7 +94,7 @@ class NyaaProvider(generic.TorrentProvider):
         
         try:
             parsedXML = etree.fromstring(data)
-            items = parsedXML.findall('/channel/item')
+            items = parsedXML.findall('channel/item')
         except Exception, e:
             logger.log(u"Error trying to load NyaaTorrents RSS feed: "+ex(e), logger.ERROR)
             logger.log(u"RSS data: "+data, logger.DEBUG)
