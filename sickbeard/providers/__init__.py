@@ -32,7 +32,8 @@ __all__ = ['ezrss',
            'omgwtfnzbs',
 		   'nextgen',
            'speedcd',
-           'binsearch'
+           'binsearch',
+           'nyaatorrents'
            ]
 
 import sickbeard
