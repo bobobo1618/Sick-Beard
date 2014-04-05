@@ -59,7 +59,7 @@ class NyaaProvider(generic.TorrentProvider):
       
     def getQuality(self, item, anime=False):
         self.debug()
-        title = helpers.get_xml_text(item.getElementsByTagName('title')[0]).replace("/"," ")    
+        title = helpers.get_xml_text(item.find('title')[0]).replace("/"," ")    
         quality = Quality.sceneQuality(title, anime)
         return quality        
         
@@ -95,7 +95,6 @@ class NyaaProvider(generic.TorrentProvider):
         try:
             parsedXML = etree.fromstring(data)
             items = parsedXML.findall('item')
-            items = parsedXML.getElementsByTagName('item')
         except Exception, e:
             logger.log(u"Error trying to load NyaaTorrents RSS feed: "+ex(e), logger.ERROR)
             logger.log(u"RSS data: "+data, logger.DEBUG)
