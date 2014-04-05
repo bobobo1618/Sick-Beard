@@ -19,6 +19,7 @@
 import urllib
 
 from xml.dom.minidom import parseString
+from xml.etree import cElementTree as etree
 
 import re
 import sys
@@ -92,7 +93,8 @@ class NyaaProvider(generic.TorrentProvider):
             return []
         
         try:
-            parsedXML = parseString(data)
+            parsedXML = etree.fromstring(data)
+            items = parsedXML.findall('item')
             items = parsedXML.getElementsByTagName('item')
         except Exception, e:
             logger.log(u"Error trying to load NyaaTorrents RSS feed: "+ex(e), logger.ERROR)
