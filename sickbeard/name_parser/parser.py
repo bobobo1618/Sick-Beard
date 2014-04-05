@@ -93,6 +93,9 @@ class NameParser(object):
                     continue
                 result.season_number = tmp_season
             
+            elif cur_regex == 'anime':
+                result.season_number = 1
+            
             if 'ep_num' in named_groups:
                 ep_num = self._convert_number(match.group('ep_num'))
                 if 'extra_ep_num' in named_groups and match.group('extra_ep_num'):
