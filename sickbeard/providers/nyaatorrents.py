@@ -118,7 +118,16 @@ class NyaaProvider(generic.TorrentProvider):
 
         return generic.TorrentProvider._get_title_and_url(self, item)
 
-    def findEpisode (self, episode, manualSearch=False):
+    def findEpisode(self, episode, manualSearch=False):
+        self._checkAuth()        
+
+        self.cache.updateCache()
+        results = self.cache.searchCache(episode, manualSearch)
+        logger.log(u"Cache results: "+str(results), logger.DEBUG)
+
+        return super(NyaaProvider, self).findEpisode(episode, manualSearch=manualSearch)
+
+    def _findEpisode (self, episode, manualSearch=False):
 
         self._checkAuth()
 
@@ -155,15 +164,10 @@ class NyaaProvider(generic.TorrentProvider):
                 if parse_result.air_date != episode.airdate:
                     logger.log("Episode "+title+" didn't air on "+str(episode.airdate)+", skipping it", logger.DEBUG)
                     continue
-            elif episode.show.anime and episode.show.absolute_numbering:
-                if episode.absolute_number not in parse_result.ab_episode_numbers:
-                    logger.log("Episode "+title+" isn't "+str(episode.absolute_number)+", skipping it", logger.DEBUG)
-                    continue
+
             elif parse_result.season_number != episode.season or episode.episode not in parse_result.episode_numbers:
                 logger.log("Episode "+title+" isn't "+str(episode.season)+"x"+str(episode.episode)+", skipping it", logger.DEBUG)
                 continue
-
-            quality = self.getQuality(item, episode.show.anime)
 
             if not episode.show.wantEpisode(episode.season, episode.episode, quality, manualSearch):
                 logger.log(u"Ignoring result "+title+" because we don't want an episode that is "+Quality.qualityStrings[quality], logger.DEBUG)
