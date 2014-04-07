@@ -680,7 +680,9 @@ def initialize(consoleLogging=True):
         NEXTGEN = bool(check_setting_int(CFG, 'NEXTGEN', 'nextgen', 0))
         NEXTGEN_USERNAME = check_setting_str(CFG, 'NEXTGEN', 'nextgen_username', '')
         NEXTGEN_PASSWORD = check_setting_str(CFG, 'NEXTGEN', 'nextgen_password', '')
-        NEXTGEN_OPTIONS = check_setting_str(CFG, 'NEXTGEN', 'nextgen_options', '') 
+        NEXTGEN_OPTIONS = check_setting_str(CFG, 'NEXTGEN', 'nextgen_options', '')
+
+        NYAA = bool(check_setting_int(CFG, 'NYAA', 'nyaa', 0))
 
         KAT = bool(check_setting_int(CFG, 'KAT', 'kat', 0))
         KAT_VERIFIED = bool(check_setting_int(CFG, 'KAT', 'kat_verified', 1))
