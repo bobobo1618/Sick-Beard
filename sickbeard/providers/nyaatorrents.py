@@ -125,7 +125,7 @@ class NyaaProvider(generic.TorrentProvider):
         results = self.cache.searchCache(episode, manualSearch)
         logger.log(u"Cache results: "+str(results), logger.DEBUG)
 
-        return super(NyaaProvider, self).findEpisode(episode, manualSearch=manualSearch)
+        return super(self.__class__, self).findEpisode(episode, manualSearch=manualSearch)
 
     def _findEpisode (self, episode, manualSearch=False):
 
