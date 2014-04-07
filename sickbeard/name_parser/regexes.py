@@ -19,12 +19,12 @@
 # all regexes are case insensitive
 
 ep_regexes = [
-              ('anime',
+              ('anime-horrible',
                # [HorribleSubs] Fairy Tail S2 - 01 [1080p].mkv
                #  Group         Show          - Ep [Quality]
-               '^\[(?P<release_group>.+)\]\ (?P<series_name>.+)\ -\ (?P<ep_num>\d+)\ \[(?P<extra_info>.+)\]$'
+               '^\[(?P<release_group>.+)\]\ (?P<series_name>.+)\ -\ (?P<ep_num>\d+)v?[0-9]?\ \(?P<extra_info>.+)$'
               ),
-              ('jojo',
+              ('anime-jojo',
                '^\[(?P<release_group>.+)\]\ (?P<series_name>.+)\ -\ (?P<ep_num>\d+)\ -\ \w+\ (?P<extra_info>.+)$'
                ),
               ('standard_repeat',
