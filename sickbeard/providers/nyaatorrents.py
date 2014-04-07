@@ -80,6 +80,7 @@ class NyaaProvider(generic.TorrentProvider):
     def _doSearch(self, search_string, show=None):
     
         params = {"term" : search_string.encode('utf-8'),
+                  "cats" : '1_37',
                   "sort" : '2', #Sort Descending By Seeders 
                  }
       
@@ -125,13 +126,16 @@ class NyaaProvider(generic.TorrentProvider):
         return (title, url)
 
     def findEpisode(self, episode, manualSearch=False):
-        self._checkAuth()        
+        self._checkAuth()
 
         self.cache.updateCache()
         results = self.cache.searchCache(episode, manualSearch)
         logger.log(u"Cache results: "+str(results), logger.DEBUG)
 
-        return super(self.__class__, self).findEpisode(episode, manualSearch=manualSearch)
+        results = super(self.__class__, self).findEpisode(episode, manualSearch=manualSearch)
+        
+        return results
+
 
     def _findEpisode (self, episode, manualSearch=False):
 

@@ -19,6 +19,11 @@
 # all regexes are case insensitive
 
 ep_regexes = [
+              ('anime-yoro',
+               # [yoro] Love Live! S2 - 01 [E311813C].mkv
+               #  Group         Show season          - Ep [Quality]
+               '^\[(?P<release_group>.+)\]\ (?P<series_name>.+)\ S(?P<season_num>\d+) -\ (?P<ep_num>\d+)(v[0-9])?\ (?P<extra_info>.+)$'
+              ),
               ('anime-horrible',
                # [HorribleSubs] Fairy Tail S2 - 01 [1080p].mkv
                #  Group         Show          - Ep [Quality]
@@ -26,11 +31,6 @@ ep_regexes = [
               ),
               ('anime-jojo',
                '^\[(?P<release_group>.+)\]\ (?P<series_name>.+)\ -\ (?P<ep_num>\d+)\ -\ \w+\ (?P<extra_info>.+)$'
-              ),
-              ('anime-yoro',
-               # [yoro] Love Live! S2 - 01 [E311813C].mkv
-               #  Group         Show season          - Ep [Quality]
-               '^\[(?P<release_group>.+)\]\ (?P<series_name>.+)\ S(?P<season_num>\d+) -\ (?P<ep_num>\d+)(v[0-9])?\ (?P<extra_info>.+)$'
               ),
               ('standard_repeat',
                # Show.Name.S01E02.S01E03.Source.Quality.Etc-Group
