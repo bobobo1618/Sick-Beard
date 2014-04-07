@@ -56,12 +56,6 @@ class NyaaProvider(generic.TorrentProvider):
         
     def imageName(self):
         return 'nyaatorrents.png'
-      
-    def getQuality(self, item, anime=False):
-        self.debug()
-        title = helpers.get_xml_text(item.find('title')[0]).replace("/"," ")    
-        quality = Quality.sceneQuality(title, anime)
-        return quality        
         
     def findSeasonResults(self, show, season):
         results = {}
