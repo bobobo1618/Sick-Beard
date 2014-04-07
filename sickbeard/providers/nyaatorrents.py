@@ -116,7 +116,13 @@ class NyaaProvider(generic.TorrentProvider):
 
     def _get_title_and_url(self, item):
 
-        return generic.TorrentProvider._get_title_and_url(self, item)
+        title = helpers.get_xml_text(item.find('title'))
+
+        url = helpers.get_xml_text(item.find('link'))
+        if url:
+            url = url.replace('&amp;', '&')
+            
+        return (title, url)
 
     def findEpisode(self, episode, manualSearch=False):
         self._checkAuth()        
