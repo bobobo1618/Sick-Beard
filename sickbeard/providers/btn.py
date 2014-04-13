@@ -24,6 +24,7 @@ from sickbeard import classes
 from sickbeard import scene_exceptions
 from sickbeard import logger
 from sickbeard import tvcache
+from sickbeard.name_parser import regexes
 from sickbeard.helpers import sanitizeSceneName
 from sickbeard.common import Quality
 from sickbeard.exceptions import ex, AuthException
@@ -33,6 +34,7 @@ from datetime import datetime
 import time
 import socket
 import math
+import re
 
 
 class BTNProvider(generic.TorrentProvider):
@@ -158,8 +160,21 @@ class BTNProvider(generic.TorrentProvider):
 
     def _get_title_and_url(self, parsedJSON):
 
-        # If we don't have a release name we need to get creative
+        url = None
+        if 'DownloadURL' in parsedJSON:
+            url = parsedJSON['DownloadURL']
+            if url:
+                # unescaped / is valid in JSON, but it can be escaped
+                url = url.replace("\\/", "/")
+
+        if 'ReleaseName' in parsedJSON and parsedJSON['ReleaseName']:
+            title = parsedJSON['ReleaseName']
+            for name, regex in regexes.ep_regexes:
+                if re.compile(regex, re.VERBOSE | re.IGNORECASE).match(title):
+                    return (title, url)
+        
         title = u''
+        # If we don't have a release name we need to get creative        
         if 'Series' in parsedJSON:
             title += parsedJSON['Series']
         if 'GroupName' in parsedJSON:
@@ -172,13 +187,6 @@ class BTNProvider(generic.TorrentProvider):
             title += '.' + parsedJSON['Codec'] if title else parsedJSON['Codec']
         if title:
             title = title.replace(' ', '.')
-
-        url = None
-        if 'DownloadURL' in parsedJSON:
-            url = parsedJSON['DownloadURL']
-            if url:
-                # unescaped / is valid in JSON, but it can be escaped
-                url = url.replace("\\/", "/")
 
         return (title, url)
 
